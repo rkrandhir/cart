@@ -1,0 +1,43 @@
+<header>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="logoWrap">
+                <a href="#"><img src="images/logo.png" /></a>
+            </div>
+            <div class="btn pull-right clearfix" ng-click='myMiniCart = !myMiniCart'>{{cart}}<span>
+            <span ng-if='itemAdded.length>0'>({{itemAdded.length}})</span></div>
+            <div class="btn pull-right clearfix">{{sign}}</div>
+        </div>
+    </nav>
+</header>
+
+<!-- Modal -->
+<div id="myMiniCart" ng-show='myMiniCart' ng-switch="itemAdded.length > 0">
+    <div ng-switch-when='false' class="emptyMiniCart">
+        <img src="/images/shoppingcart-empty.png"/>
+        <p class="emptyMsg">Shopping Cart is Emply!</p>
+        <p>Welcome back! If you had items in your shopping bag, we have saved them for you. You can SIGN IN now to see them, or whenever you're ready to check out.</p>
+    </div>
+    <div ng-switch-when='true' class="miniCart">
+        <div class='clearfix miniCartItemWrap'>
+            <div class='clearfix miniCartItem' ng-repeat="cartItem in itemAdded track by $index">
+                <div class="col-sm-4 bag-left"><img ng-src="{{cartItem.img}}" /></div>
+                <div class="col-sm-8">
+                    <div class='miniCartPriceCont clearfix'>
+                        <div class='miniCartPrice pull-left'>
+                            {{cartItem.price | roundedNumber | currency : '₹ ' : 0}}
+                        </div>
+                        <div class='pull-right'>
+                            <a href="#" class="iconDelete" ng-click="deleteItem(cartItem)">Delete Item</a> 
+                        </div>
+                    </div>
+                    <p>{{cartItem.name}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="miniCartTotalWrap clearfix">
+            <div class="totalPrice">Total: <span>{{totalPrice | currency : '₹ ' : 0}}</span></div>
+            <div class="btnViewCart">VIEW BAG</div>
+        </div>
+    </div>
+</div>

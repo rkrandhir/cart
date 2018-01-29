@@ -1,0 +1,22 @@
+<section class="outerPanel">
+    <div class="container">
+        <div class="row outerWrapper">
+            <div class="col-xs-12">
+                <h2 class="productTitle">{{products.family}} <span>({{productLength}})</span></h2>
+                <h3>Total Added: {{price}}</h3>
+                <ul class="productList">
+                    <li ng-repeat="item in products.productList" class="col-xs-12 col-md-2 clearfix" ng-mouseenter="options=true" ng-mouseleave="options=false">
+                        <div class="prodImg"><img ng-src="{{item.img}}" class="img-responsive" /></div>
+                        <div class="prodDetails clearfix">
+                            <a href="javascript:void(0)" class="productTitle">{{item.name | limitCharItemName}}</a>
+                            <p class="productPrice"> {{item.price | roundedNumber | currency : '₹ ' : 0}}</p>
+                            <star-directive></star-directive>
+                            <div class="prodAddBtnWrap"  ng-click="addToCart(item)" ng-show="options" >Add to Cart</div>
+                        </div>
+                    </li>
+                </ul>                
+            </div>
+        </div>
+    </div>
+</section>
+
